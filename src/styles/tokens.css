@@ -1,0 +1,113 @@
+
+/* ==========================================
+   LIGHT THEME - DEFAULT
+========================================== */
+
+:root {
+  color-scheme: light;
+
+  /* ==============================
+     COLOR SYSTEM
+  ============================== */
+
+  --color-background: #f5f2e9;
+  --color-surface: #fffdf7;
+  --color-surface-muted: #ebe7dc;
+
+  --color-text: #191919;
+  --color-text-muted: #666259;
+
+  --color-primary: #c9f36b;
+  --color-primary-soft: #e8f5cb;
+  --color-secondary: #c9ddf5;
+
+  --color-border: #191919;
+  --color-shadow: #191919;
+
+  /* ==============================
+     TYPOGRAPHY
+  ============================== */
+
+  --font-heading: "Space Grotesk", "Inter", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.375rem;
+  --font-size-2xl: 1.75rem;
+  --font-size-3xl: 2.25rem;
+
+  /* ==============================
+     BORDER & SHADOW
+  ============================== */
+
+  --border-width: 2px;
+  --border-width-strong: 3px;
+
+  --radius-sm: 5px;
+  --radius-md: 9px;
+  --radius-lg: 12px;
+
+  --shadow-sm: 3px 3px 0 var(--color-shadow);
+  --shadow-md: 5px 5px 0 var(--color-shadow);
+  --shadow-lg: 7px 7px 0 var(--color-shadow);
+
+  /* ==============================
+     SPACING
+  ============================== */
+
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+
+  /* ==============================
+     LAYOUT
+  ============================== */
+
+  --container-width: 1080px;
+  --page-gutter: clamp(1rem, 4vw, 2rem);
+
+  --section-spacing: clamp(2.5rem, 5vw, 3.75rem);
+
+  /* ==============================
+     TRANSITIONS
+  ============================== */
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+}
+
+
+/* ==========================================
+   DARK THEME
+========================================== */
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* ==============================
+     COLOR SYSTEM
+  ============================== */
+
+  --color-background: #171717;
+  --color-surface: #252525;
+  --color-surface-muted: #303030;
+
+  --color-text: #f4f1e8;
+  --color-text-muted: #b6b2a8;
+
+  --color-primary: #c9f36b;
+  --color-primary-soft: #354321;
+  --color-secondary: #334155;
+
+  --color-border: #e8e5dc;
+  --color-shadow: #050505;
+}

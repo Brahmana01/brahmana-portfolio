@@ -1,0 +1,296 @@
+/* ==========================================
+   CONTACT SECTION
+========================================== */
+
+.contact-section {
+  padding-top: 1rem;
+  padding-bottom: var(--section-spacing);
+}
+
+/* ==========================================
+   CONTACT LAYOUT
+========================================== */
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+/* ==========================================
+   CONTACT INTRO
+========================================== */
+
+.contact-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.contact-title {
+  max-width: 500px;
+
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+}
+
+.contact-title span {
+  color: var(--color-primary);
+  text-shadow: 1px 1px 0 var(--color-border);
+}
+
+.contact-description {
+  max-width: 480px;
+
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  line-height: 1.8;
+}
+
+/* ==========================================
+   AVAILABILITY
+========================================== */
+
+.contact-availability {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  margin-top: 0.4rem;
+
+  color: var(--color-text);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+}
+
+.contact-status-dot {
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+
+  background: #22a06b;
+  border-radius: 50%;
+}
+
+/* ==========================================
+   MAIN CONTACT BUTTON
+========================================== */
+
+.contact-main-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  margin-top: 0.4rem;
+  text-decoration: none;
+}
+
+/* ==========================================
+   CONTACT DETAILS
+========================================== */
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.2rem;
+
+  min-width: 0;
+  padding: 1.5rem;
+
+  color: var(--color-text);
+  background: var(--color-surface);
+
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+
+  box-shadow: var(--shadow-md);
+}
+
+.contact-email-group,
+.contact-social-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+
+  width: 100%;
+  min-width: 0;
+}
+
+/* ==========================================
+   LABEL
+========================================== */
+
+.contact-label {
+  color: var(--color-text-muted);
+
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+/* ==========================================
+   EMAIL LINK
+========================================== */
+
+.contact-email-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+
+  width: 100%;
+  min-width: 0;
+
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: clamp(0.85rem, 1.5vw, 1.15rem);
+  font-weight: 750;
+
+  overflow-wrap: anywhere;
+  text-decoration: none;
+
+  transition: color var(--transition-fast);
+}
+
+.contact-email-link span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.contact-email-link span:last-child {
+  flex-shrink: 0;
+}
+
+.contact-email-link:hover {
+  color: #739c26;
+}
+
+/* ==========================================
+   DIVIDER
+========================================== */
+
+.contact-divider {
+  width: 100%;
+  height: 1px;
+
+  background: var(--color-border);
+  opacity: 0.35;
+}
+
+/* ==========================================
+   SOCIAL LINKS
+========================================== */
+
+.contact-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+
+  width: 100%;
+}
+
+.contact-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  padding: 0.5rem 0.75rem;
+
+  color: var(--color-text);
+  background: var(--color-background);
+
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+
+  box-shadow: 2px 2px 0 var(--color-shadow);
+
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-decoration: none;
+
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.contact-social-link:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--color-shadow);
+  background: var(--color-primary-soft);
+}
+
+.contact-social-link:focus-visible,
+.contact-email-link:focus-visible,
+.contact-main-button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
+/* ==========================================
+   RESPONSIVE - TABLET
+========================================== */
+
+@media (max-width: 900px) {
+  .contact-layout {
+    gap: 1.5rem;
+  }
+
+  .contact-details {
+    padding: 1.2rem;
+  }
+
+  .contact-socials {
+    gap: 0.5rem;
+  }
+}
+
+/* ==========================================
+   RESPONSIVE - MOBILE
+========================================== */
+
+@media (max-width: 700px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .contact-copy {
+    gap: 0.85rem;
+  }
+
+  .contact-title {
+    font-size: 2.2rem;
+  }
+
+  .contact-details {
+    padding: 1.1rem;
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+@media (max-width: 380px) {
+  .contact-title {
+    font-size: 1.9rem;
+  }
+
+  .contact-email-link {
+    font-size: 0.82rem;
+  }
+
+  .contact-socials {
+    gap: 0.5rem;
+  }
+
+  .contact-social-link {
+    padding: 0.45rem 0.6rem;
+  }
+}

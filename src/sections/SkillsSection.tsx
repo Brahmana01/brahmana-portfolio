@@ -1,7 +1,5 @@
-import { skills } from "../data/skills";
-
 import PageContainer from "../components/layout/PageContainer";
-import TechBadge from "../components/ui/TechBadge";
+import { skills } from "../data/skills";
 
 export default function SkillsSection() {
   return (
@@ -10,10 +8,10 @@ export default function SkillsSection() {
       id="skills"
     >
       <PageContainer>
-        <div className="section-heading">
+        <div className="skills-section__heading">
           <div>
             <p className="hero-eyebrow">
-              MY TECHNICAL TOOLKIT
+              TECHNICAL EXPERTISE
             </p>
 
             <h2 className="section-title">
@@ -21,41 +19,38 @@ export default function SkillsSection() {
             </h2>
 
             <p className="section-description">
-              Technologies and tools I work with across
-              different areas of software development.
+              Technologies and tools I use to build,
+              develop, and maintain digital solutions.
             </p>
           </div>
 
-          <span className="skills-level">
-            Intermediate Level
-          </span>
+          <div className="skills-section__meta">
+            CORE TOOLKIT
+          </div>
         </div>
 
-        <div className="skills-grid">
-          {skills.map((group) => (
-            <article
-              className="skill-card"
-              key={group.category}
+        <div className="skills-list">
+          {skills.map((group, index) => (
+            <div
+              className="skills-list__row"
+              key={`${group.category}-${index}`}
             >
-              <div className="skill-card__header">
-                <h3 className="skill-card__title">
-                  {group.category}
-                </h3>
+              <span className="skills-list__number">
+                {String(index + 1).padStart(2, "0")}
+              </span>
 
-                <span className="skill-card__count">
-                  {String(group.skills.length).padStart(2, "0")}
-                </span>
-              </div>
+              <h3 className="skills-list__category">
+                {group.category}
+              </h3>
 
-              <div className="skill-card__list">
+              <ul className="skills-list__items">
                 {group.skills.map((skill) => (
-                  <TechBadge
-                    key={skill}
-                    label={skill}
-                  />
+                  <li key={skill}>
+                    {skill}
+                  </li>
                 ))}
-              </div>
-            </article>
+              </ul>
+            </div>
           ))}
         </div>
       </PageContainer>

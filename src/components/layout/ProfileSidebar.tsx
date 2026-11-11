@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { profile } from "../../data/profile";
 import ThemeToggle from "../ui/ThemeToggle";
+import RotatingProfilePhoto from "../profile/RotatingProfilePhoto";
+import type { ProfilePhoto } from "../profile/RotatingProfilePhoto";
 import type { ThemeMode, SocialLink } from "../../types/portfolio";
 import type { IconType } from "react-icons";
 
@@ -17,6 +19,31 @@ type ProfileSidebarProps = {
   theme: ThemeMode;
   onToggleTheme: () => void;
 };
+
+const imageBase = `${import.meta.env.BASE_URL}images/profile/`;
+
+const profilePhotos: ProfilePhoto[] = [
+  {
+    src: profile.photo,
+    alt: "Brahmana Purba - Professional portrait",
+  },
+  {
+    src: `${imageBase}brahmana-purba-volcano.webp`,
+    alt: "Brahmana Purba enjoying a mountain hiking adventure",
+  },
+  {
+    src: `${imageBase}brahmana-purba-presentation.webp`,
+    alt: "Brahmana Purba presenting his final project at Institut Teknologi Del",
+  },
+  {
+    src: `${imageBase}brahmana-purba-mt-sibayak.webp`,
+    alt: "Brahmana Purba at Mount Sibayak",
+  },
+  {
+    src: `${imageBase}brahmana-purba-campus-activity.webp`,
+    alt: "Brahmana Purba participating in a campus activity",
+  },
+];
 
 const socialIcons: Record<SocialLink["platform"], IconType> = {
   GitHub: FaGithub,
@@ -36,7 +63,10 @@ export default function ProfileSidebar({
         <div className="sidebar-profile">
           <div className="sidebar-profile__photo">
             {profile.photo ? (
-              <img src={profile.photo} alt="Portrait of Brahmana Purba, Information Technology student and developer" />
+              <RotatingProfilePhoto
+                photos={profilePhotos}
+                intervalMs={5000}
+              />
             ) : (
               <span>BP</span>
             )}

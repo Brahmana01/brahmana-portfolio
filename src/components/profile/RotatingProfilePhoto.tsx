@@ -1,32 +1,23 @@
-
 import { useEffect, useState } from "react";
 import "./RotatingProfilePhoto.css";
 
-const photos = [
-  {
-    src: "/images/profile/brahmana-purba.webp",
-    alt: "Brahmana Purba, Information Technology student at Institut Teknologi Del, in a formal portrait.",
-  },
-  {
-    src: "/images/profile/brahmana-purba-volcano.webp",
-    alt: "Brahmana Purba at a volcanic mountain crater during a hiking activity.",
-  },
-  {
-    src: "/images/profile/brahmana-purba-presentation.webp",
-    alt: "Brahmana Purba presenting a mobile-based Batak Toba educational game project at Institut Teknologi Del.",
-  },
-  {
-    src: "/images/profile/brahmana-purba-mt-sibayak.webp",
-    alt: "Brahmana Purba at the summit of Mount Sibayak holding a summit sign.",
-  },
-  {
-    src: "/images/profile/brahmana-purba-campus-activity.webp",
-    alt: "Brahmana Purba participating in a campus activity while holding an Institut Teknologi Del flag.",
-  },
-];
+export type ProfilePhoto = {
+  src: string;
+  alt: string;
+};
 
-function shufflePhotos() {
-  const result = photos.map((_, index) => index);
+type RotatingProfilePhotoProps = {
+  photos: ProfilePhoto[];
+  intervalMs?: number;
+};
+
+type RotationState = {
+  order: number[];
+  position: number;
+};
+
+function shuffleArray(items: number[]): number[] {
+  const result = [...items];
 
   for (let i = result.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -36,55 +27,91 @@ function shufflePhotos() {
   return result;
 }
 
-export default function RotatingProfilePhoto() {
-  const [activeIndex, setActiveIndex] = useState(0);
+function createInitialOrder(length: number): number[] {
+  if (length <= 1) return [0];
+
+  return [
+    0,
+    ...shuffleArray(
+      Array.from({ length: length - 1 }, (_, index) => index + 1)
+    ),
+  ];
+}
+
+function createNextOrder(
+  length: number,
+  previousIndex: number
+): number[] {
+  const order = shuffleArray(
+    Array.from({ length }, (_, index) => index)
+  );
+
+  // Hindari foto terakhir muncul kembali secara langsung.
+  if (order.length > 1 && order[0] === previousIndex) {
+    [order[0], order[1]] = [order[1], order[0]];
+  }
+
+  return order;
+}
+
+export default function RotatingProfilePhoto({
+  photos,
+  intervalMs = 5000,
+}: RotatingProfilePhotoProps) {
+  const [rotation, setRotation] = useState<RotationState>(() => ({
+    order: createInitialOrder(photos.length),
+    position: 0,
+  }));
 
   useEffect(() => {
-    if (
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return;
-    }
-
-    let order = shufflePhotos();
-    let position = 0;
-
-    setActiveIndex(order[position]);
+    if (photos.length <= 1) return;
 
     const interval = window.setInterval(() => {
-      position++;
+      setRotation((current) => {
+        if (current.position < current.order.length - 1) {
+          return {
+            ...current,
+            position: current.position + 1,
+          };
+        }
 
-      // Semua foto ditampilkan sekali
-      // sebelum urutan acak berikutnya dimulai.
-      if (position >= order.length) {
-        order = shufflePhotos();
-        position = 0;
-      }
+        const previousIndex =
+          current.order[current.position];
 
-      setActiveIndex(order[position]);
-    }, 5000);
+        return {
+          order: createNextOrder(photos.length, previousIndex),
+          position: 0,
+        };
+      });
+    }, intervalMs);
 
     return () => window.clearInterval(interval);
-  }, []);
+  }, [photos.length, intervalMs]);
+
+  // Preload seluruh foto agar pergantian lebih halus.
+  useEffect(() => {
+    photos.forEach((photo) => {
+      const image = new Image();
+      image.src = photo.src;
+    });
+  }, [photos]);
+
+  if (photos.length === 0) return null;
+
+  const activeIndex = rotation.order[rotation.position];
+  const activePhoto = photos[activeIndex];
+
+  if (!activePhoto) return null;
 
   return (
-    <div
+    <img
+      key={activePhoto.src}
+      src={activePhoto.src}
+      alt={activePhoto.alt}
       className="rotating-profile-photo"
-      aria-label="Photos of Brahmana Purba"
-    >
-      {photos.map((photo, index) => (
-        <img
-          key={photo.src}
-          src={photo.src}
-          alt={photo.alt}
-          className={`rotating-profile-photo__image ${
-            index === activeIndex ? "is-active" : ""
-          }`}
-          aria-hidden={index !== activeIndex}
-          loading="eager"
-          decoding="async"
-        />
-      ))}
-    </div>
+      loading="eager"
+      decoding="async"
+      draggable={false}
+    />
   );
 }

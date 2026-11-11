@@ -1,0 +1,40 @@
+
+.rotating-profile-photo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.rotating-profile-photo__image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  opacity: 0;
+  transform: scale(1.025);
+
+  transition:
+    opacity 900ms ease,
+    transform 1200ms ease;
+
+  pointer-events: none;
+}
+
+.rotating-profile-photo__image.is-active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotating-profile-photo__image {
+    transition: none;
+    transform: none;
+  }
+}
